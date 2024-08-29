@@ -12,7 +12,6 @@ import os
 #ai config and model, also bigquery
 api_key = os.environ.get('API_KEY')
 genai.configure(api_key=api_key)
-#genai.configure(api_key="AIzaSyCO6DU8BSFiqM-KiAblOKHYlKjgBZcddQ4")
 model = genai.GenerativeModel('gemini-pro')
 client = bigquery.Client()
 

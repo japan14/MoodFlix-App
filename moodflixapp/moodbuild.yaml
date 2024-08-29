@@ -1,0 +1,8 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build','-t', 'us-central1-docker.pkg.dev/${PROJECT_ID}/moodflix-repo/moodflix-image', '.']
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'us-central1-docker.pkg.dev/${PROJECT_ID}/moodflix-repo/moodflix-image']
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args: ['run', 'deploy', 'streamlitservice',  '--image', 'us-central1-docker.pkg.dev/${PROJECT_ID}/moodflix-repo/moodflix-image', 
+    '--region', 'us-central1', '--port', '8501', '--allow-unauthenticated', '--set-secrets=API_KEY=projects/$PROJECT_NUMBER/secrets/movieai-api-key/versions/latest']
